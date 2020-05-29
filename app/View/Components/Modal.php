@@ -11,7 +11,7 @@ class Modal extends Component
      *
      * @return void
      */
-    public $content; 
+    public $content;
     public $title;
     public $footer;
 

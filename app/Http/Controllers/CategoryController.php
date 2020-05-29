@@ -21,27 +21,26 @@ class CategoryController extends Controller
             $category = Category::orderBy('id', 'desc');
             //  $users = DB::table('users')->paginate(15);
             return datatables()->of($category)
-            ->addColumn('action', 'admin.category.action')
-            ->addIndexColumn()
-            ->make(true);
+                ->addColumn('action', 'admin.category.action')
+                ->addIndexColumn()
+                ->make(true);
         }
-      
+
         $category = Category::orderBy('id', 'desc');
         return view('admin.category.index', compact('category'));
-    
     }
 
     public function getall()
     {
-    //    $category = Category::orderBy('id', 'desc');
-    //    return datatables()->of($category)
-    //    ->addColumn('action', 'admin.category.action')
-    //    ->addIndexColumn()
-    //    ->make(true);
+        //    $category = Category::orderBy('id', 'desc');
+        //    return datatables()->of($category)
+        //    ->addColumn('action', 'admin.category.action')
+        //    ->addIndexColumn()
+        //    ->make(true);
 
 
     }
- 
+
 
     /**
      * Show the form for creating a new resource.
@@ -63,7 +62,7 @@ class CategoryController extends Controller
     {
         // Category::updateOrCreate(['id' => $request->id],
         //         ['name' => $request->name]);        
-   
+
         // return response()->json(['success'=>'Product saved successfully.']);
         // $category =  Category::create([
         //     'name' => $request->name,
@@ -71,7 +70,7 @@ class CategoryController extends Controller
         // ]);    
 
         // $validated = $request->validated(); // check validate true/false, Will return only validated data
-        
+
         // return redirect()->back()->withSuccess('added new category '.$request->name.' successfuly');
     }
 
@@ -107,9 +106,9 @@ class CategoryController extends Controller
      */
     public function update(Request $request, $id)
     {
-    
+
         $post = Category::find($id)->update($request->all());
-        return response()->json(['success'=>'Product saved successfully.']);
+        return response()->json(['success' => 'Product saved successfully.']);
     }
 
     /**
@@ -120,6 +119,8 @@ class CategoryController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $category = Category::findOrFail($id);
+        $category->delete();
+        return response()->json($category);
     }
 }
