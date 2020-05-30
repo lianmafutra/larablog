@@ -13,13 +13,13 @@ class Button extends Component
      * @return void
      */
 
-     //data yang akan kita passing
-    public $color; 
+    //data yang akan kita passing
+    public $color;
     public $title;
-   
 
 
-    public function __construct($color, $title)
+
+    public function __construct($color = 'info', $title)
     {
         $this->color = $color;
         $this->title = $title;
@@ -32,9 +32,7 @@ class Button extends Component
      */
     public function render()
     {
-            
-            return view('components.button');
-        
-       
+
+        return view('components.button');
     }
 }

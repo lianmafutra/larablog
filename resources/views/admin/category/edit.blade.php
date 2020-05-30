@@ -1,4 +1,4 @@
-<x-modal id="updateModal" title="Edit Category Name">
+<x-modal id="updateModal" idForm="editForm" title="Edit Category Name">
     <x-slot name="content">
         <x-input placeholder="Nama Category..." : name="name">
         </x-input>
@@ -42,10 +42,10 @@
           $.ajax({
             type: 'PUT',
             url: 'category/' + id,
-            data: $('#productForm').serialize(),
+            data: $('#editForm').serialize(),
             dataType: 'json',
             success: function (data) {
-               $('#productForm').trigger("reset");
+               //$('#productForm').trigger("reset");
                 $('#updateModal').modal('hide');
                 $('#saveBtn').html('Update data');
                 table.ajax.reload( null, false );

@@ -1,3 +1,1 @@
-
-    <button  class="btn btn-{{ $color }}" {{ $attributes ?? null}}  > {{ $title??null }}</button>
-   
+<button class="btn btn-{{ $color??null }}" {{ $attributes ?? null}}> {{ $title??null }}</button>

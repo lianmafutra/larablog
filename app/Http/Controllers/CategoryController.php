@@ -60,18 +60,15 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-        // Category::updateOrCreate(['id' => $request->id],
-        //         ['name' => $request->name]);        
 
-        // return response()->json(['success'=>'Product saved successfully.']);
-        // $category =  Category::create([
-        //     'name' => $request->name,
-        //     'slug'=> Str::slug($request->name)
-        // ]);    
+        $category = Category::create([
+            'name' => $request->name,
+            'slug'  => Str::slug($request->name)
+        ]);
 
-        // $validated = $request->validated(); // check validate true/false, Will return only validated data
 
-        // return redirect()->back()->withSuccess('added new category '.$request->name.' successfuly');
+
+        return response()->json($request->name);
     }
 
     /**
