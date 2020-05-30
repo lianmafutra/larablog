@@ -31,6 +31,11 @@
                 $('#deleteModal').modal('hide'); 
                 $('#btnDelete').html('Delete data');
                 table.ajax.reload( null, false );
+                iziToast.success({
+                  title: 'Success',
+                  message: 'Delete Data Successfully !',
+                  position: 'topRight'
+              });
             },
             error: function (data) {
                 console.log('Error:', data);

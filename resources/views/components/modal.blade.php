@@ -5,9 +5,11 @@
         <h5 class="modal-title" id="exampleModalLabel">{{ $title ?? null}}</h5>
       </div>
       <div class="modal-body">
-        <form id="{{ $idForm}}" name="productForm" class="form-horizontal">
+        <form id="{{$idForm}}" name="productForm" class="form-horizontal">
           <div class="content">
-            {{ $content ?? null }}
+            <div class="form-group">
+              {{ $content ?? null }}
+            </div>
           </div>
         </form>
         <div class="modal-footer">

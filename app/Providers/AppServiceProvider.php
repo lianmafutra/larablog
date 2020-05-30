@@ -29,8 +29,8 @@ class AppServiceProvider extends ServiceProvider
 
         Blade::component('components.alert', 'alert');
 
-        Blade::include('admin.category.create', 'create');
-        Blade::include('admin.category.edit', 'edit');
+        // Blade::include('admin.category.create', 'create');
+        Blade::include('admin.category.createOrUpdate', 'createOrUpdate');
         Blade::include('admin.category.delete', 'delete');
         Blade::include('admin.category.data', 'data');
 

@@ -15,13 +15,15 @@ class Input extends Component
 
     public $name;
     public $placeholder;
+    public $id;
 
 
 
-    public function __construct($name, $placeholder = null)
+    public function __construct($name, $placeholder = null, $id = null)
     {
         $this->name = $name;
         $this->placeholder = $placeholder;
+        $this->id = $id;
     }
 
     /**

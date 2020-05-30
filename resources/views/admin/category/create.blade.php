@@ -1,7 +1,8 @@
-<x-modal id="addModal" idForm="addForm" title="Tambah Data Category">
+{{-- <x-modal id="addModal" idForm="addForm" title="Tambah Data Category">
   <x-slot name="content">
-    <x-input name="name">
+    <x-input id="name" name="name" placeholder="Name category ...">
     </x-input>
+    <div class="text-danger error" data-error="name"></div>
   </x-slot>
   <x-slot name="footer">
     <x-button color="secondary" title="Batal" data-dismiss="modal" />
@@ -18,7 +19,7 @@
       });
 
       $('#btnCreate').click(function(){
-          $('#productForm').trigger("reset");
+          $('#addForm').trigger("reset");
           $('#addModal').modal('show'); 
       });
         $('#btnStore').click(function (e) {
@@ -26,21 +27,39 @@
           $(this).html('Sending..');
         $.ajax({
           type: 'POST',
-          url: 'category/',
-          data: $('#addForm').serialize(),
-          dataType: 'json',
-          success: function (data) {
-              $('#productForm').trigger("reset");
-              $('#addModal').modal('hide');
-              $('#btnStore').html('Update data');
-              table.ajax.reload( null, false );
-          },
-          error: function (data) {
-              console.log('Error:', data);
-              $('#btnStore').html('Save Changes');
-              alert("Terjadi kesalahan, Coba lagi ")
-          }
-      });
-    });
-  });
-</script>
+          // url: 'category/',
+          url: "{{ route('category.store') }}",
+data: $('#addForm').serialize(),
+dataType: 'json',
+success: function (data) {
+$('#productForm').trigger("reset");
+$('#addModal').modal('hide');
+$('#btnStore').html('Update data');
+table.ajax.reload( null, false );
+iziToast.success({
+title: 'Success',
+message: 'Created Data Successfully !',
+position: 'topRight'
+});
+
+},
+error: function (data) {
+
+$('#btnStore').html('Save Changes');
+
+
+let errors = data.responseJSON
+for(let key in errors)
+{
+let errorDiv = $(`.error[data-error="${key}"]`);
+if(errorDiv.length )
+{
+errorDiv.text(errors[key][0]);
+}
+}
+
+}
+});
+});
+});
+</script> --}}

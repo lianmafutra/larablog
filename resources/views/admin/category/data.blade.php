@@ -15,8 +15,7 @@
                   columns: [
                         {data:'DT_RowIndex',orderable:false, searchable:false, width:'10px'}, 
                         { data: 'name', name: 'name' },
-                        { data: 'id', name: 'id' },
-                        { data: 'created_at', name: 'created_at' },
+                        { data: 'slug', name: 'slug' },
                         { data: 'action', name: 'action', width : '30px' }
                      ]
               }); 

@@ -6,6 +6,7 @@ use App\Category;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use App\Http\Requests\CategoryStoreRequest;
+use Illuminate\Auth\Events\Validated;
 use Yajra\DataTables\DataTables;
 
 class CategoryController extends Controller
@@ -25,6 +26,7 @@ class CategoryController extends Controller
                 ->addIndexColumn()
                 ->make(true);
         }
+
 
         $category = Category::orderBy('id', 'desc');
         return view('admin.category.index', compact('category'));
@@ -58,17 +60,17 @@ class CategoryController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(CategoryStoreRequest $request)
     {
 
-        $category = Category::create([
-            'name' => $request->name,
-            'slug'  => Str::slug($request->name)
-        ]);
 
+        $category =  Category::updateOrCreate(
 
+            ['id' => $request->id],
+            ['name' => $request->name,  'slug'  => Str::slug($request->name)]
+        );
 
-        return response()->json($request->name);
+        return response()->json($category);
     }
 
     /**
@@ -101,11 +103,11 @@ class CategoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(CategoryStoreRequest $request, $id)
     {
 
-        $post = Category::find($id)->update($request->all());
-        return response()->json(['success' => 'Product saved successfully.']);
+        // $category = Category::find($id)->update($request->all());
+        // return response()->json($category);
     }
 
     /**
