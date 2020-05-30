@@ -9,6 +9,8 @@
     @table([ 'th' => ['no', 'nama', 'slug', 'action'],
     'id' => 'tbl-category'])
 
+    @each('components.table', $jobs, 'job')
+
 </section>
 
 {{-- Ajax Modal CRUD--}}
