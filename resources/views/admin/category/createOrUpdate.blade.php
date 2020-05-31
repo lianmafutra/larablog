@@ -39,7 +39,6 @@
               });
     
           });
-
             $('#btnCreate').click(function(){
             $('#editForm').trigger("reset");
             $('#nameError').text('');
@@ -65,8 +64,7 @@
                   title: 'Success',
                   message: 'Update Data Successfully !',
                   position: 'topRight'
-              });
-            },
+              });},
             error: function (data) {
                 console.log('Error:', data);
                 $('#saveBtn').html('Save Changes');
@@ -78,4 +76,6 @@
         });
       });
 });
+
+
 </script>

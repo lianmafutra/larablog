@@ -18,5 +18,5 @@ Route::get('/', function () {
 });
 
 Route::resource('category', 'CategoryController');
-Route::get('/getall', 'CategoryController@getall')->name('getall.category');
-
+Route::resource('post', 'PostController');
+// Route::get('/getall', 'CategoryController@getall')->name('getall.category');

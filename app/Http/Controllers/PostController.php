@@ -2,14 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Category;
-use Illuminate\Http\Request;
-use Illuminate\Support\Str;
-use App\Http\Requests\CategoryStoreRequest;
 use App\Post;
+use Illuminate\Http\Request;
+use App\Category;
 
-
-class CategoryController extends Controller
+class PostController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -18,18 +15,20 @@ class CategoryController extends Controller
      */
     public function index(Request $request)
     {
-        if ($request->ajax()) {
-            $category = Category::with('post')->orderBy('id', 'desc');
 
-            return datatables()->of($category)
+        if ($request->ajax()) {
+            $posts = Post::with('category');
+            return datatables()->of($posts)
+                ->editColumn('thumbnail', function () {
+                    return '<img src="https://www.digopaul.com/wp-content/uploads/related_images/2015/09/08/placeholder_2.jpg" height="150px">';
+                })
                 ->addColumn('action', 'admin.category.action')
                 ->addIndexColumn()
+                ->rawColumns(['thumbnail', 'action']) // wajib untuk menmapilkan memproses html misal gambar
                 ->make(true);
         }
-
-        return view('admin.category.index', compact('category'));
+        return view('admin.post.index', compact('posts'));
     }
-
 
     /**
      * Show the form for creating a new resource.
@@ -38,7 +37,7 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        return view('admin.category.create');
+        return view('admin.post.create');
     }
 
     /**
@@ -47,17 +46,9 @@ class CategoryController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(CategoryStoreRequest $request)
+    public function store(Request $request)
     {
-
-
-        $category =  Category::updateOrCreate(
-
-            ['id' => $request->id],
-            ['name' => $request->name,  'slug'  => Str::slug($request->name)]
-        );
-
-        return response()->json($category);
+        //
     }
 
     /**
@@ -79,8 +70,7 @@ class CategoryController extends Controller
      */
     public function edit($id)
     {
-        $category = Category::find($id);
-        return response()->json($category);
+        //
     }
 
     /**
@@ -90,12 +80,9 @@ class CategoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(CategoryStoreRequest $request, $id)
+    public function update(Request $request, $id)
     {
-
-        $post = Post::find(6);
-        $post->category_id = 5; // id uncategorized (default)
-        $post->save();
+        //
     }
 
     /**
@@ -106,9 +93,6 @@ class CategoryController extends Controller
      */
     public function destroy($id)
     {
-        $category = Category::findOrFail($id);
-        $category->delete();
-
-        return response()->json($category);
+        //
     }
 }

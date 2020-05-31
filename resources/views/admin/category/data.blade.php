@@ -11,13 +11,24 @@
                   serverSide:true,
                   pageLength: 5,
                   paging: true,
+                
                   ajax: '{!! route('category.index') !!}',
                   columns: [
                         {data:'DT_RowIndex',orderable:false, searchable:false, width:'10px'}, 
-                        { data: 'name', name: 'name' },
-                        { data: 'slug', name: 'slug' },
-                        { data: 'action', name: 'action', width : '30px' }
-                     ]
+                        { data: 'name' },
+                        { data: 'slug' },
+                        { data: 'post',   width : '80px' },
+                        { data: 'action', width : '30px' }
+                     ],
+                     columnDefs: [{
+                            // fungsi untuk merender / mengolah value sebelum ditampilak di datatable
+                            "render": function ( data, type, row ) {
+                            size = Object.keys(data).length; //hitung data dari kolom post tipe object
+                            return size; // mengambalikan data yang sudah dihitung untuk ditampilkan ke datatable
+                        },
+                        className: 'text-center',
+                        "targets": 3 // select kolom post  
+                    }],
               }); 
       });
 </script>
