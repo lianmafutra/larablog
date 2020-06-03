@@ -14,8 +14,7 @@ class Button extends Component
      */
 
     //data yang akan kita passing
-    public $color;
-    public $title;
+    public $color, $title;
 
 
 

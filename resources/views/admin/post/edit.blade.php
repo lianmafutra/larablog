@@ -36,8 +36,6 @@
 
                 <img id="img_thum" style=" padding-bottom:5px" src="{{ asset($post->getThumbnail()) }}" height="200px">
 
-
-
                 <div class="form-group">
                     <a id="btnDelThumbnail" href="javascript:void(0)"
                         style=" display: inline-block; margin-bottom: 10px" class="btn btn-danger btn-sm delete"
@@ -49,7 +47,6 @@
 
                 <div class="form-group" style="float: right">
                     <x-button color="success" title="Back" href="{{ route('post.index')}}" />
-                    {{-- <x-button style="margin-bottom: 10px" title="Publish Post" /> --}}
                     <button type="submit" class="btn btn-primary">Publish Post</button>
                 </div>
 
@@ -72,10 +69,8 @@
     let thumbnail = {!! json_encode($post->getThumbnail()) !!} ;
     if(thumbnail=='https://via.placeholder.com/150x200.png?text=No+Cover'){
         document.getElementById("btnDelThumbnail").style.display = "none";
-     
-    }else{
-       
     }
+
 
     //Reload ketika image di pilih dari direktori
     function previewImage() {
@@ -84,10 +79,10 @@
         oFReader.readAsDataURL(document.getElementById("thumbnail").files[0]);
     
         oFReader.onload = function(oFREvent) {
-        document.getElementById("img_thum").src = oFREvent.target.result;
-        document.getElementById("btnDelThumbnail").style.display = "inline-block";
+            document.getElementById("img_thum").src = oFREvent.target.result;
+            document.getElementById("btnDelThumbnail").style.display = "inline-block";
+        };
     };
-  };
   
 </script>
 

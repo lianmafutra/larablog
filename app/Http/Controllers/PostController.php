@@ -113,7 +113,7 @@ class PostController extends Controller
     {
         // $post->update($request->all());
 
-
+        $thumbnail_name = $post->thumbnail;
         if ($request->hasFile('thumbnail')) {
             $request->file('thumbnail')->store('public/upload'); //store to storage link
             $thumbnail_name = $request->thumbnail->hashName(); // get name only

@@ -11,9 +11,7 @@ class Modal extends Component
      *
      * @return void
      */
-    public $content;
-    public $title;
-    public $footer;
+    public $content, $title, $footer;
 
     public function __construct($content, $title, $footer)
     {
