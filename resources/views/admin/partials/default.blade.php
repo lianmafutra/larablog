@@ -14,13 +14,22 @@
 
       <!-- Main Content -->
       <div class="main-content">
-        @yield('content')
+        <div class="row">
+          <div class="col-12 ">
+            @yield('content')
+          </div>
 
+        </div>
       </div>
       @include('admin.partials.footer')
     </div>
   </div>
   @include('admin.partials.scripts')
+
 </body>
+
+<script>
+
+</script>
 
 </html>

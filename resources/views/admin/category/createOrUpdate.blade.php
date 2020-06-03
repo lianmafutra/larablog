@@ -1,9 +1,8 @@
 <x-modal id="updateModal" idForm="editForm">
     <x-slot name="content">
         <input type="hidden" name="id" id="id">
-        <x-input id="name" name="name" placeholder="Input Category Name ...">
-        </x-input>
-        <small class="text-danger" id="nameError"></small>
+        <input type="text" class="form-control" id="name" name="name">
+        <small class=" text-danger" id="nameError"></small>
     </x-slot>
     <x-slot name="footer">
         <x-button color="secondary" title="Cancel" data-dismiss="modal" />
@@ -20,7 +19,6 @@
         });
 
         $('#tbl-category').on('click', '.edit', function () {
-              $("#category").val('');
               $('#nameError').text('');
               id = $(this).attr('id');
               $('.modal-title').text("Edit Category Name");
@@ -42,6 +40,7 @@
             $('#btnCreate').click(function(){
             $('#editForm').trigger("reset");
             $('#nameError').text('');
+            document.getElementById("name").placeholder = "Input Category Name ...";
             $('#updateModal').modal('show'); 
             $('.modal-title').text("Create Category Name");
             $('#saveBtn').html('Add Data');

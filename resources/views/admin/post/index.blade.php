@@ -16,4 +16,6 @@
 @delete() --}}
 @include('admin.post.data');
 
+
+
 @endsection

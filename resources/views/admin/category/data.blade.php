@@ -15,7 +15,7 @@
                   ajax: '{!! route('category.index') !!}',
                   columns: [
                         {data:'DT_RowIndex',orderable:false, searchable:false, width:'10px'}, 
-                        { data: 'name' },
+                        { data: 'name' , name:'name'},
                         { data: 'slug' },
                         { data: 'post',   width : '80px' },
                         { data: 'action', width : '30px' }

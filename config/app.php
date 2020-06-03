@@ -162,7 +162,8 @@ return [
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
         Yajra\Datatables\DatatablesServiceProvider::class,
-
+        Barryvdh\Debugbar\ServiceProvider::class,
+        LaraIzitoast\LaraIzitoastServiceProvider::class,
 
         /*
          * Package Service Providers...
