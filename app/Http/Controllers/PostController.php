@@ -131,6 +131,7 @@ class PostController extends Controller
     {
         $post = Post::findOrFail($id);
         $post->delete();
+        dd($post);
         return redirect()->route('post.index');
     }
 }
