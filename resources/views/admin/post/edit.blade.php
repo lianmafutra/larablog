@@ -34,7 +34,10 @@
 
                 <label><b>Thumbnail</b></label><br>
 
-                <img id="img_thum" style=" padding-bottom:5px" src="{{ asset($post->getThumbnail()) }}" height="200px">
+                <img id="img_thum" name="img_thum" style=" padding-bottom:5px" src="{{ asset($post->getThumbnail()) }}"
+                    height="200px">
+
+                <input type="text" value="default" id="thumb_stat" name="thumb_stat" style="display: none" />
 
                 <div class="form-group">
                     <a id="btnDelThumbnail" href="javascript:void(0)"
@@ -42,7 +45,7 @@
                         role="button" aria-pressed="true"> <i class="fa fa-trash"></i>
                         Delete thumbnail</a>
                     <br>
-                    <input type="file" id="thumbnail" name="thumbnail" onchange="previewImage();" />
+                    <input type="file" value="" id="thumbnail" name="thumbnail" onchange="previewImage();" />
                 </div>
 
                 <div class="form-group" style="float: right">
@@ -60,9 +63,15 @@
 
 <script>
     $('#category').val({!! json_encode($post->category_id) !!}).trigger('change');
+  
+
+
+    //Delete img thumnbnail
     $('#btnDelThumbnail').click(function(){
          $("#img_thum").attr("src","https://via.placeholder.com/150x200.png?text=No+Cover");
          document.getElementById("btnDelThumbnail").style.display = "none";
+         $("#thumb_stat").val("hapus");
+
     });
 
     //check kondisi jika image null/ tidak ada cover
@@ -81,7 +90,9 @@
         oFReader.onload = function(oFREvent) {
             document.getElementById("img_thum").src = oFREvent.target.result;
             document.getElementById("btnDelThumbnail").style.display = "inline-block";
+
         };
+       
     };
   
 </script>

@@ -26,7 +26,7 @@ class PostController extends Controller
             return datatables()->of($posts)
                 ->editColumn('thumbnail', function (Post $post) {
                     // return '<img src="https://www.digopaul.com/wp-content/uploads/related_images/2015/09/08/placeholder_2.jpg" height="150px">';
-                    return '<img src="' . $post->getThumbnail() . '" height="150px" width="150px">';
+                    return '<img src="' . $post->getThumbnail() . '" height="150px" width="150px" style="object-fit: cover">';
                     // clock($post->getThumbnail());
                 })
                 ->addColumn('action', 'admin.post.action')
@@ -34,6 +34,9 @@ class PostController extends Controller
                 ->rawColumns(['thumbnail', 'action']) // wajib untuk menmapilkan memproses html misal gambar
                 ->make(true);
         }
+
+
+
 
 
         return view('admin.post.index', compact('posts'));
@@ -109,24 +112,19 @@ class PostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Post $post)
+    public function update(PostStoreRequest $request, Post $post)
     {
-        // $post->update($request->all());
-
-        $thumbnail_name = $post->thumbnail;
-        if ($request->hasFile('thumbnail')) {
-            $request->file('thumbnail')->store('public/upload'); //store to storage link
-            $thumbnail_name = $request->thumbnail->hashName(); // get name only
+        try {
+            $post->update([
+                'title'       => $request->title,
+                'category_id' => $request->category_id ?? 0,
+                'content'     => $request->content,
+                'thumbnail'   => $post->getThumbnailName($request, $post) ?? null
+            ]);
+            return redirect()->route('post.index');
+        } catch (\Throwable $th) {
+            dd($th);
         }
-
-        $post->update([
-            'title'       => $request->title,
-            'category_id' => $request->category_id ?? 0,
-            'content'     => $request->content,
-            'thumbnail'   => $thumbnail_name ?? null
-        ]);
-
-        return redirect()->route('post.index');
     }
 
     /**
