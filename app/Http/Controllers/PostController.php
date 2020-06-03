@@ -20,9 +20,8 @@ class PostController extends Controller
      */
     public function index(Request $request)
     {
-
+        $posts = Post::with('category')->orderBy('updated_at', 'DESC');
         if ($request->ajax()) {
-            $posts = Post::with('category')->orderBy('updated_at', 'DESC');
             return datatables()->of($posts)
                 ->editColumn('thumbnail', function (Post $post) {
                     // return '<img src="https://www.digopaul.com/wp-content/uploads/related_images/2015/09/08/placeholder_2.jpg" height="150px">';
@@ -34,11 +33,6 @@ class PostController extends Controller
                 ->rawColumns(['thumbnail', 'action']) // wajib untuk menmapilkan memproses html misal gambar
                 ->make(true);
         }
-
-
-
-
-
         return view('admin.post.index', compact('posts'));
     }
 
@@ -135,6 +129,8 @@ class PostController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $post = Post::findOrFail($id);
+        $post->delete();
+        return redirect()->route('post.index');
     }
 }
