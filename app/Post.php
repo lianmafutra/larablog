@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\Storage;
 
 class Post extends Model
 {
-    protected $fillable = ['title', 'content', 'thumbnail', 'category_id'];
+    protected $fillable = ['title', 'content', 'thumbnail', 'category_id', 'user_id'];
 
     public function category()
     {

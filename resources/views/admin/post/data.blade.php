@@ -18,6 +18,7 @@
                         { data: 'category.name'},
                         { data: 'thumbnail' },
                         { data: 'komentar' },
+                        { data: 'komentar' },
                         { data: 'created_at' },
                         { data: 'action', width : '30px' }
                      ]

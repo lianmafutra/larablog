@@ -14,9 +14,17 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('admin.home');
+    return view('welcome');
 });
 
-Route::resource('category', 'CategoryController');
-Route::resource('post', 'PostController');
-// Route::get('/getall', 'CategoryController@getall')->name('getall.category');
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('admin.home');
+
+
+
+Route::group(['middleware' => 'auth'], function () {
+
+    Route::resource('category', 'CategoryController');
+    Route::resource('post', 'PostController');
+});

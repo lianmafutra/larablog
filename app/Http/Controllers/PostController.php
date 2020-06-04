@@ -8,6 +8,7 @@ use App\Category;
 use App\Http\Requests\PostStoreRequest;
 use Barryvdh\Debugbar\Facade as Debugbar;
 use Clockwork\Clockwork;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 
 
@@ -33,6 +34,7 @@ class PostController extends Controller
                 ->rawColumns(['thumbnail', 'action']) // wajib untuk menmapilkan memproses html misal gambar
                 ->make(true);
         }
+
         return view('admin.post.index', compact('posts'));
     }
 
@@ -44,7 +46,6 @@ class PostController extends Controller
     public function create()
     {
         $category = Category::all();
-
         return view('admin.post.create', compact('category'));
     }
 
@@ -67,7 +68,8 @@ class PostController extends Controller
             'title'       => $request->title,
             'category_id' => $request->category_id ?? 0,
             'content'     => $request->content,
-            'thumbnail'   => $thumbnail_name
+            'thumbnail'   => $thumbnail_name,
+            'user_id'     => Auth::id()
         ]);
 
         clock($post->toArray());
