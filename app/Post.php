@@ -49,7 +49,7 @@ class Post extends Model
     }
 
     //menghapus thumbnail lama ketika update thumbnail post
-    public function deleteOldThumbnail($thumbnail_name)
+    public static function deleteOldThumbnail($thumbnail_name)
     {
         Storage::delete('public/upload/' . $thumbnail_name);
     }

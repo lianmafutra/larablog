@@ -131,7 +131,7 @@ class PostController extends Controller
     {
         $post = Post::findOrFail($id);
         $post->delete();
-        dd($post);
+        Post::DeleteOldThumbnail($post->thumbnail); // jika post dihapus gambar thumbnail juga dihapus
         return redirect()->route('post.index');
     }
 }
