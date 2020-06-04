@@ -21,7 +21,7 @@ class PostController extends Controller
      */
     public function index(Request $request)
     {
-        $posts = Post::with('category')->orderBy('updated_at', 'DESC');
+        $posts = Post::with(['category', 'users'])->orderBy('updated_at', 'DESC')->get();
         if ($request->ajax()) {
             return datatables()->of($posts)
                 ->editColumn('thumbnail', function (Post $post) {

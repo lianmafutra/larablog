@@ -18,6 +18,11 @@ class Post extends Model
         return $this->belongsTo(Category::class);
     }
 
+    public function users()
+    {
+        return $this->belongsTo(User::class, 'user_id', 'id');
+    }
+
     public function getThumbnail()
     {
         // jika mempunyai value dari database

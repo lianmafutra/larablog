@@ -19,6 +19,11 @@
       </li>
       <li><a class="nav-link" href="{{ route('category.index') }}"><i class="fas fa-tags"></i><span>Tag</span></a>
       </li>
+      <li><a class="nav-link" href="{{ route('category.index') }}"><i
+            class="fas fa-user-friends"></i><span>Users</span></a>
+      </li>
+      <li><a class="nav-link" href="{{ route('category.index') }}"><i class="fas fa-cog"></i><span>Settings</span></a>
+      </li>
     </ul>
   </aside>
 </div>
