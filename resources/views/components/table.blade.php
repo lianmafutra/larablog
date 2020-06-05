@@ -2,7 +2,7 @@
     <thead>
         <tr>
             @foreach ( $th as $data )
-            <th >{{ $data }}</th>
+            <th>{{ $data }}</th>
             @endforeach
         </tr>
     </thead>

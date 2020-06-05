@@ -25,16 +25,16 @@ class PostController extends Controller
         if ($request->ajax()) {
             return datatables()->of($posts)
                 ->editColumn('thumbnail', function (Post $post) {
-                    // return '<img src="https://www.digopaul.com/wp-content/uploads/related_images/2015/09/08/placeholder_2.jpg" height="150px">';
                     return '<img src="' . $post->getThumbnail() . '" height="150px" width="150px" style="object-fit: cover">';
-                    // clock($post->getThumbnail());
+                })
+                ->editColumn('category.name', function (Post $post) {
+                    return '<h6 class="badge badge-info"> ' . $post->category->name . '</h6>';
                 })
                 ->addColumn('action', 'admin.post.action')
                 ->addIndexColumn()
-                ->rawColumns(['thumbnail', 'action']) // wajib untuk menmapilkan memproses html misal gambar
+                ->rawColumns(['thumbnail', 'action', 'category.name']) // wajib untuk menmapilkan memproses html misal gambar
                 ->make(true);
         }
-
         return view('admin.post.index', compact('posts'));
     }
 
