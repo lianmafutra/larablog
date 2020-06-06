@@ -11,6 +11,7 @@ use Barryvdh\Debugbar\Facade as Debugbar;
 use Clockwork\Clockwork;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
+use DB;
 
 
 class PostController extends Controller
@@ -60,10 +61,18 @@ class PostController extends Controller
      */
     public function create()
     {
-        $category = Category::all();
-        $tags = Tag::get();
-        return view('admin.post.create', compact('category', 'tags'));
+        try {
+            DB::beginTransaction();
+            $category = Category::all();
+            $tags = Tag::get();
+            DB::commit();
+            return view('admin.post.create', compact('category', 'tags'));
+        } catch (\Throwable $th) {
+            DB::rollback();
+        }
     }
+
+
 
     /**
      * Store a newly created resource in storage.
@@ -88,7 +97,14 @@ class PostController extends Controller
             'user_id'     => Auth::id()
         ]);
 
-        clock($post->toArray());
+
+        $post->tags()->attach($request->tags);
+
+        // $tags = ['1', '2'];
+        // foreach ($tags as $item) { 
+
+        // }
+
 
         return redirect()->back();
     }

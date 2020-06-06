@@ -27,11 +27,11 @@
                 </div>
                 <label>Tag</label>
                 <div class="form-group">
-                    <select id="tag" name="tag" class="form-control select2" style="width:100%!important;"
+                    <select id="tags" name="tags[]" class="form-control select2" style="width:100%!important;"
                         multiple="multiple">
                         <option value="" holder>Select Tag</option>
                         @foreach ($tags as $item)
-                        <option value="{{ $item->name}}">{{ $item->name }}</option>
+                        <option value="{{ $item->id}}">{{ $item->name }}</option>
                         @endforeach
                     </select>
                 </div>
@@ -52,7 +52,7 @@
       
         allowClear: true,
     );
-    $('#tag').select2(
+    $('#tags').select2(
       
       allowClear: true,
   );
