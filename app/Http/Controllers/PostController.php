@@ -122,11 +122,10 @@ class PostController extends Controller
     {
         //  $post = Post::find($id);
         $post = Post::with(['category', 'users', 'tags'])->find($id);
-
-
+        $tags = Tag::get();
 
         $category = Category::all();
-        return view('admin.post.edit', compact('post', 'category'));
+        return view('admin.post.edit', compact('post', 'category', 'tags'));
     }
 
     /**
@@ -145,6 +144,7 @@ class PostController extends Controller
                 'content'     => $request->content,
                 'thumbnail'   => $post->getThumbnailName($request, $post) ?? null
             ]);
+            $post->tags()->sync($request->tags);
             return redirect()->route('post.index');
         } catch (\Throwable $th) {
             dd($th);

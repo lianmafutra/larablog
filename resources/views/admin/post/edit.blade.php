@@ -36,8 +36,8 @@
                     <select id="tags" name="tags[]" class="form-control select2" style="width:100%!important;"
                         multiple="multiple">
                         <option value="" holder>Select Tag</option>
-                        @foreach ($post->tags as $item)
-                        <option value="{{ $item->id }}">{{ $item->name }}</option>
+                        @foreach ($tags as $item)
+                        <option value="{{ $item->id}}">{{ $item->name }}</option>
                         @endforeach
                     </select>
                 </div>
@@ -113,7 +113,10 @@
         tags_id.push(tag.id);
     });
     $('#tags').val(tags_id).trigger('change');
-
+    $('#tags').on('change', function(){
+    var data = $('#tags option:selected').text();
+    $('#tags').val(data);
+    });
 
 </script>
 
