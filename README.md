@@ -5,6 +5,7 @@ Fitur  :
 - CRUD Modal AJAX + server validation
 - Eloquent feature UpdateOrCreate
 - SoftDelete (unprogress)
+- DBtranscation
 
 
 #Screenshoot
