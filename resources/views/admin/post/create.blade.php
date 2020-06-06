@@ -25,14 +25,19 @@
                         @endforeach
                     </select>
                 </div>
+                <label>Tag</label>
+                <div class="form-group">
+                    <select id="tag" name="tag" class="form-control select2" style="width:100%!important;"
+                        multiple="multiple">
+                        <option value="" holder>Select Tag</option>
+                        @foreach ($tags as $item)
+                        <option value="{{ $item->name}}">{{ $item->name }}</option>
+                        @endforeach
+                    </select>
+                </div>
                 <x-input id="content" name="content" label="Konten" placeholder="" />
-
-
                 <x-input type="file" id="thumbnail" name="thumbnail" label="Thumbnail" />
-
-
                 <x-button color="success" title="Back" href="{{ route('post.index')}}" />
-                {{-- <x-button style="margin-bottom: 10px" title="Publish Post" /> --}}
                 <button type="submit" class="btn btn-primary">Publish Post</button>
             </form>
         </div>
@@ -47,6 +52,10 @@
       
         allowClear: true,
     );
+    $('#tag').select2(
+      
+      allowClear: true,
+  );
 
 </script>
 

@@ -23,6 +23,11 @@ class Post extends Model
         return $this->belongsTo(User::class, 'user_id', 'id');
     }
 
+    public function tags()
+    {
+        return $this->belongsToMany(Tag::class);
+    }
+
     public function getThumbnail()
     {
         // jika mempunyai value dari database

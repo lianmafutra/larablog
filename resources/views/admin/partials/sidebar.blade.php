@@ -22,7 +22,9 @@
       <li class="{{set_active('category.index')}}"><a class="nav-link" href="{{ route('category.index') }}"><i
             class="fas fa-th-list"></i><span>Category</span></a>
       </li>
-      <li><a class="nav-link" href="{{ route('category.index') }}"><i class="fas fa-tags"></i><span>Tag</span></a>
+
+      <li class="{{ set_active('tag.index') }}"><a class="nav-link" href="{{ route('tag.index') }}"><i
+            class="fas fa-tags"></i><span>Tag</span></a>
       </li>
 
       <li class="nav-item dropdown {{set_active('user.index')}}">

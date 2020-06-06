@@ -6,7 +6,7 @@
     <x-button id="btnCreate" style="margin-bottom: 10px" title="Add New Post" href="{{ route('post.create') }}">
     </x-button>
 
-    @table([ 'th' => ['no', 'title post', 'category','thumbnail','komentar','creator','created_at','action'],
+    @table([ 'th' => ['no', 'title post', 'category','thumbnail','Tag','creator','created_at','action'],
     'id' => 'tbl-posts'])
 
 

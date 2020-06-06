@@ -6,6 +6,7 @@ use App\Post;
 use Illuminate\Http\Request;
 use App\Category;
 use App\Http\Requests\PostStoreRequest;
+use App\Tag;
 use Barryvdh\Debugbar\Facade as Debugbar;
 use Clockwork\Clockwork;
 use Illuminate\Support\Facades\Auth;
@@ -21,18 +22,32 @@ class PostController extends Controller
      */
     public function index(Request $request)
     {
-        $posts = Post::with(['category', 'users'])->orderBy('updated_at', 'DESC')->get();
+        $posts = Post::with(['category', 'users', 'tags'])->orderBy('updated_at', 'DESC')->get();
+
+
         if ($request->ajax()) {
-            return datatables()->of($posts)
+
+            $data = '<li>aaa</li>';
+
+            return datatables()->of($posts, $data)
                 ->editColumn('thumbnail', function (Post $post) {
                     return '<img src="' . $post->getThumbnail() . '" height="150px" width="150px" style="object-fit: cover">';
                 })
                 ->editColumn('category.name', function (Post $post) {
                     return '<h6 class="badge badge-info"> ' . $post->category->name . '</h6>';
                 })
+                ->editColumn('tags', function (Post $post) {
+
+                    $data = [];
+                    for ($i = 0; $i < count($post->tags); $i++) {
+                        array_push($data, '<li class="badge badge-secondary" style="margin-bottom:5px" >' . $post->tags[$i]->name . '</li>');
+                    }
+
+                    return  implode(" ", $data);
+                })
                 ->addColumn('action', 'admin.post.action')
                 ->addIndexColumn()
-                ->rawColumns(['thumbnail', 'action', 'category.name']) // wajib untuk menmapilkan memproses html misal gambar
+                ->rawColumns(['thumbnail', 'action', 'category.name', 'tags']) // wajib untuk menmapilkan memproses html misal gambar
                 ->make(true);
         }
         return view('admin.post.index', compact('posts'));
@@ -46,7 +61,8 @@ class PostController extends Controller
     public function create()
     {
         $category = Category::all();
-        return view('admin.post.create', compact('category'));
+        $tags = Tag::get();
+        return view('admin.post.create', compact('category', 'tags'));
     }
 
     /**
