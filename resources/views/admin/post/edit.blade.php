@@ -30,6 +30,17 @@
                         @endforeach
                     </select>
                 </div>
+
+                <label>Tag</label>
+                <div class="form-group">
+                    <select id="tags" name="tags[]" class="form-control select2" style="width:100%!important;"
+                        multiple="multiple">
+                        <option value="" holder>Select Tag</option>
+                        @foreach ($post->tags as $item)
+                        <option value="{{ $item->id }}">{{ $item->name }}</option>
+                        @endforeach
+                    </select>
+                </div>
                 <x-input id="content" name="content" label="Konten" value="{{ $post->content }}" />
 
                 <label><b>Thumbnail</b></label><br>
@@ -47,6 +58,7 @@
                     <br>
                     <input type="file" value="" id="thumbnail" name="thumbnail" onchange="previewImage();" />
                 </div>
+
 
                 <div class="form-group" style="float: right">
                     <x-button color="success" title="Back" href="{{ route('post.index')}}" />
@@ -94,7 +106,15 @@
         };
        
     };
+
   
+    let tags_id = [];  
+    {!! json_encode($post->tags) !!}.forEach(tag => {
+        tags_id.push(tag.id);
+    });
+    $('#tags').val(tags_id).trigger('change');
+
+
 </script>
 
 @endsection

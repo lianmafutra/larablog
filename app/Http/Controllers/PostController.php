@@ -97,15 +97,7 @@ class PostController extends Controller
             'user_id'     => Auth::id()
         ]);
 
-
         $post->tags()->attach($request->tags);
-
-        // $tags = ['1', '2'];
-        // foreach ($tags as $item) { 
-
-        // }
-
-
         return redirect()->back();
     }
 
@@ -128,7 +120,11 @@ class PostController extends Controller
      */
     public function edit($id)
     {
-        $post = Post::find($id);
+        //  $post = Post::find($id);
+        $post = Post::with(['category', 'users', 'tags'])->find($id);
+
+
+
         $category = Category::all();
         return view('admin.post.edit', compact('post', 'category'));
     }
