@@ -1,7 +1,6 @@
 Aplikasi Blog sederhana menggunakan Laravel 7 (unprogress)
 
-Fitur  : 
-- Component blade-x
+- Component blade-X
 - CRUD Modal AJAX + server validation
 - Eloquent feature UpdateOrCreate
 - SoftDelete (unprogress)
