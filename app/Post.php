@@ -2,11 +2,9 @@
 
 namespace App;
 
-use App\Http\Requests\PostStoreRequest;
-use GuzzleHttp\Psr7\Request;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Storage;
+use Carbon\Carbon;
 
 
 class Post extends Model
@@ -23,6 +21,10 @@ class Post extends Model
         return $this->belongsTo(User::class, 'user_id', 'id');
     }
 
+
+    //Relasi many to many dengan tags 
+    // 1 post * tags
+    // 1 tags * post
     public function tags()
     {
         return $this->belongsToMany(Tag::class);
@@ -62,5 +64,12 @@ class Post extends Model
     public static function deleteOldThumbnail($thumbnail_name)
     {
         Storage::delete('public/upload/' . $thumbnail_name);
+    }
+
+    //Accessors date , eloquent sudah terintegrasi dengan class carbon 
+    public function getCreatedAtAttribute()
+    {
+        return Carbon::parse($this->attributes['created_at'])
+            ->format('d, M Y H:i');
     }
 }

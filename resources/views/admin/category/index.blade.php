@@ -6,7 +6,7 @@
     <x-button id="btnCreate" data-toggle="modal" style="margin-bottom: 10px" title="Add New Category">
     </x-button>
 
-    @table([ 'th' => ['no', 'nama', 'slug','post', 'action'],
+    @table([ 'th' => ['no', 'nama', 'slug','post','created_at', 'action'],
     'id' => 'tbl-category'])
 
 </section>

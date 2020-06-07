@@ -18,6 +18,7 @@
                         { data: 'name' , name:'name'},
                         { data: 'slug' },
                         { data: 'post',   width : '80px' },
+                        { data: 'created_at'},
                         { data: 'action', width : '30px' }
                      ],
                      columnDefs: [{

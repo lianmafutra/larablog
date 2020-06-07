@@ -21,6 +21,7 @@ class CategoryController extends Controller
         if ($request->ajax()) {
             $category = Category::with('post')->orderBy('id', 'desc');
 
+
             return datatables()->of($category)
                 ->addColumn('action', 'admin.category.action')
                 ->addIndexColumn()

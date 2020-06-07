@@ -6,7 +6,7 @@
     <x-button id="btnCreate" data-toggle="modal" style="margin-bottom: 10px" title="Add New Tag">
     </x-button>
 
-    @table([ 'th' => ['no', 'nama', 'action'],
+    @table([ 'th' => ['no', 'nama','post','created_at', 'action'],
     'id' => 'tbl-tag'])
 
 </section>

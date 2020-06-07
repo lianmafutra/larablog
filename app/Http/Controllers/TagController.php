@@ -16,6 +16,7 @@ class TagController extends Controller
     public function index(Request $request)
     {
         $tags = Tag::latest('id')->get();
+
         if ($request->ajax()) {
             return datatables()->of($tags)
                 ->addColumn('action', 'admin.tag.action')
